@@ -1,5 +1,5 @@
-mod client;
-mod network;
+pub mod client;
+pub mod network;
 
 #[cfg(test)]
 mod tests {

@@ -1,5 +1,5 @@
-mod server;
+pub mod server;
 
-fn connect() {
+pub fn connect() {
     //
 }
