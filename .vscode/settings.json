@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "target": true,
+        "**/*.rs.bk": true,
+        "**/.DS_Store": true
+    }
+}
