@@ -2,16 +2,33 @@ extern crate rand;
 
 use std::io;
 use std::io::Write;
+use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
     let ans = rand::thread_rng().gen_range(1, 101);
-    print!("guess the number: ");
-    io::stdout().flush().unwrap();
-    let mut guess = String::new();
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("could not read line");
-    println!("you guessed {}", guess);
-    println!("the true answer is {}", ans);
+    loop {
+        print!("guess the number: ");
+        io::stdout().flush().unwrap();
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("could not read line");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(x) => x,
+            Err(e) => {
+                println!("{}", e);
+                continue;
+            }
+        };
+        match guess.cmp(&ans) {
+            Ordering::Less => println!("too small"),
+            Ordering::Greater => println!("too big"),
+            Ordering::Equal => {
+                println!("nice work");
+                break;
+            },
+        }
+    }
+    println!("ans = {}", ans);
 }
