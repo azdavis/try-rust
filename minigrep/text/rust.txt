@@ -1,0 +1,3 @@
+Rust: a programming language.
+Safe, fast, productive: pick three.
+Trust me.
