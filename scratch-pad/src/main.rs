@@ -72,4 +72,12 @@ fn main() {
         hue = 5;
     }
     println!("{}", hue);
+
+    let mut x = String::from("guy");
+    f(&mut x);
+    println!("{}", x);
+}
+
+fn f(x: &mut String) {
+    x.push_str("fella");
 }
