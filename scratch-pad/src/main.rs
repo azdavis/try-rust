@@ -53,7 +53,7 @@ fn main() {
     println!("guy = {}", guy);
 
     /*
-     *                             this needs to implement Copy for this to work
+     *                             this needs to implement Copy for map to work
      *                             vvvvvvvvvvvvvvvvvvv
     let a: Result<String, ()> = Ok(String::from("heh"));
      * because of the partial move here
