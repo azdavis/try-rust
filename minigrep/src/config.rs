@@ -1,3 +1,4 @@
+use std::env;
 use std::error::Error;
 use std::fmt;
 
@@ -14,7 +15,7 @@ impl Config {
         }
         let query = args[1].clone();
         let filename = args[2].clone();
-        let case_sensitive = true;
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
         Ok(Config { query, filename, case_sensitive })
     }
 }
