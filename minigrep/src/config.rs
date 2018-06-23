@@ -9,7 +9,7 @@ pub struct Config {
 impl Config {
     pub fn new(args: &[String]) -> Result<Self, Box<dyn Error>> {
         if args.len() != 3 {
-            return Err(Box::new(BadArgs));
+            return Err(Box::new(BadArgs(args[0].clone())));
         }
         let query = args[1].clone();
         let filename = args[2].clone();
@@ -18,16 +18,16 @@ impl Config {
 }
 
 #[derive(Debug)]
-struct BadArgs;
+struct BadArgs(String);
 
 impl Error for BadArgs {
     fn description(&self) -> &str {
-        "bad args"
+        "BadArgs"
     }
 }
 
 impl fmt::Display for BadArgs {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.description())
+        write!(f, "usage: {} <query> <filename>", self.0)
     }
 }
