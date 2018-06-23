@@ -27,7 +27,6 @@ impl Config {
     }
 }
 
-#[derive(Debug)]
 struct BadArgs;
 
 impl Error for BadArgs {
