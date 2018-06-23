@@ -23,9 +23,28 @@ fn search<'a>(
     corpus: &'a str,
     case_sensitive: bool
 ) -> Vec<&'a str> {
+    if case_sensitive {
+        search_cs(query, corpus)
+    } else {
+        search_cis(query, corpus)
+    }
+}
+
+fn search_cs<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
     let mut ret = Vec::new();
     for line in corpus.lines() {
         if line.contains(query) {
+            ret.push(line);
+        }
+    }
+    ret
+}
+
+fn search_cis<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
+    let mut ret = Vec::new();
+    let query = query.to_lowercase();
+    for line in corpus.lines() {
+        if line.to_lowercase().contains(&query) {
             ret.push(line);
         }
     }
