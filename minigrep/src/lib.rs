@@ -23,11 +23,12 @@ fn search<'a>(
     corpus: &'a str,
     case_sensitive: bool
 ) -> Vec<&'a str> {
-    if case_sensitive {
-        search_cs(query, corpus)
+    let f = if case_sensitive {
+        search_cs
     } else {
-        search_cis(query, corpus)
-    }
+        search_cis
+    };
+    f(query, corpus)
 }
 
 fn search_cs<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
