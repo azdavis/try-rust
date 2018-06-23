@@ -11,3 +11,22 @@ pub fn run(config: config::Config) -> Result<(), Box<Error>> {
     println!("contents = \n{}", contents);
     Ok(())
 }
+
+fn search<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
+    vec![]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn find_one() {
+        let query = "They’d banish";
+        let corpus = include_str!("../text/poem.txt");
+        assert_eq!(
+            vec!["They’d banish us, you know."],
+            search(query, corpus)
+        );
+    }
+}
