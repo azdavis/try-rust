@@ -4,7 +4,7 @@ use std::process;
 
 extern crate minigrep;
 
-fn fatal(err: Box<Error>) {
+fn fatal(err: Box<dyn Error>) {
     eprintln!("{}", err);
     process::exit(1);
 }

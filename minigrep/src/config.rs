@@ -7,7 +7,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Self, Box<Error>> {
+    pub fn new(args: &[String]) -> Result<Self, Box<dyn Error>> {
         if args.len() != 3 {
             return Err(Box::new(BadArgs));
         }
