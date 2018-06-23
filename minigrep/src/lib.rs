@@ -13,7 +13,13 @@ pub fn run(config: config::Config) -> Result<(), Box<dyn Error>> {
 }
 
 fn search<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
-    vec![]
+    let mut ret = Vec::new();
+    for line in corpus.lines() {
+        if line.contains(query) {
+            ret.push(line);
+        }
+    }
+    ret
 }
 
 #[cfg(test)]
