@@ -1,4 +1,6 @@
 use std::env;
+use std::fs::File;
+use std::io::prelude::*;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -8,4 +10,8 @@ fn main() {
     }
     let query = &args[1];
     let file = &args[2];
+    let mut file = File::open(file).expect("no such file");
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).expect("could not read");
+    println!("contents = \n{}", contents);
 }
