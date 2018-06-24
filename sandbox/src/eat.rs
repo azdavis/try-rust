@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 pub fn run() {
     let s = String::from("guy");
     let _rs = &s;
@@ -8,6 +10,6 @@ pub fn run() {
     eat(n);
 }
 
-fn eat<T>(_x: T) {
-    println!("eat");
+fn eat<T>(x: T) where T: Display {
+    println!("eat {}", x);
 }
