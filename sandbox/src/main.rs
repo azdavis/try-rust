@@ -1,10 +1,6 @@
-// mod empty_let;
-mod iter;
-// mod lazy;
-// mod partial_move;
-// mod rect;
+mod eat;
 
 fn main() {
     println!("Hello, world!");
-    iter::run();
+    eat::run();
 }
