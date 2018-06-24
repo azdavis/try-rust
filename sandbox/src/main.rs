@@ -1,6 +1,6 @@
-mod lazy;
+mod mut_ref;
 
 fn main() {
     println!("Hello, world!");
-    lazy::run();
+    mut_ref::run();
 }
