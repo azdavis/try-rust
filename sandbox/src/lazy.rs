@@ -12,9 +12,7 @@ impl<T, F> Lazy<T, F> where F: Fn() -> T {
         match self.val {
             Some(ref x) => x,
             None => {
-                let val = (self.calc)();
-                self.val = Some(val);
-                self.val.as_ref().unwrap()
+                self.val.get_or_insert_with(&self.calc)
             },
         }
     }

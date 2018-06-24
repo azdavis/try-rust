@@ -1,6 +1,6 @@
-mod eat;
+mod lazy;
 
 fn main() {
     println!("Hello, world!");
-    eat::run();
+    lazy::run();
 }
