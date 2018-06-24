@@ -32,24 +32,18 @@ fn search<'a>(
 }
 
 fn search_cs<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
-    let mut ret = Vec::new();
-    for line in corpus.lines() {
-        if line.contains(query) {
-            ret.push(line);
-        }
-    }
-    ret
+    corpus
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 fn search_cis<'a>(query: &str, corpus: &'a str) -> Vec<&'a str> {
-    let mut ret = Vec::new();
     let query = query.to_lowercase();
-    for line in corpus.lines() {
-        if line.to_lowercase().contains(&query) {
-            ret.push(line);
-        }
-    }
-    ret
+    corpus
+        .lines()
+        .filter(|line| line.to_lowercase().contains(&query))
+        .collect()
 }
 
 #[cfg(test)]
