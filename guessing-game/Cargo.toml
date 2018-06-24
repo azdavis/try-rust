@@ -1,5 +1,5 @@
 [package]
-name = "try-rust"
+name = "guessing-game"
 version = "0.1.0"
 authors = ["Ariel Davis <ariel.z.davis@icloud.com>"]
 
