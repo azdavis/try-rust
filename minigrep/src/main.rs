@@ -1,8 +1,8 @@
+extern crate minigrep;
+
 use std::env;
 use std::error::Error;
 use std::process;
-
-extern crate minigrep;
 
 fn fatal(err: Box<dyn Error>) {
     eprintln!("{}", err);
