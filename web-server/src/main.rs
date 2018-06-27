@@ -1,6 +1,8 @@
 use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
+use std::thread;
+use std::time::Duration;
 
 const OK: &'static str = concat!(
     "HTTP/1.1 200 OK",
@@ -31,6 +33,9 @@ fn handle_conn(mut stream: TcpStream) {
     stream.read(&mut buffer).unwrap();
     // println!("request: {}", String::from_utf8_lossy(&buffer[..]));
     let resp = if buffer.starts_with(b"GET / HTTP/1.1\r\n") {
+        OK
+    } else if buffer.starts_with(b"GET /sleep HTTP/1.1\r\n") {
+        thread::sleep(Duration::from_secs(5));
         OK
     } else {
         NOT_FOUND
