@@ -33,7 +33,6 @@ fn main() {
 fn handle_conn(mut stream: TcpStream) {
     let mut buffer = [0; 512];
     stream.read(&mut buffer).unwrap();
-    // println!("request: {}", String::from_utf8_lossy(&buffer[..]));
     let resp = if buffer.starts_with(b"GET / HTTP/1.1\r\n") {
         OK
     } else if buffer.starts_with(b"GET /sleep HTTP/1.1\r\n") {
