@@ -4,6 +4,8 @@ use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
 
+const HOST: &'static str = "localhost:7878";
+
 const OK: &'static str = concat!(
     "HTTP/1.1 200 OK",
     "\r\n",
@@ -19,7 +21,7 @@ const NOT_FOUND: &'static str = concat!(
 );
 
 fn main() {
-    let listener = TcpListener::bind("localhost:7878").unwrap();
+    let listener = TcpListener::bind(HOST).unwrap();
     for stream in listener.incoming() {
         match stream {
             Ok(x) => handle_conn(x),
