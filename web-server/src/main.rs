@@ -2,11 +2,18 @@ use std::io::prelude::*;
 use std::net::TcpListener;
 use std::net::TcpStream;
 
-const RESPONSE: &'static str = concat!(
+const OK: &'static str = concat!(
     "HTTP/1.1 200 OK",
     "\r\n",
     "\r\n",
     include_str!("../static/index.html"),
+);
+
+const NOT_FOUND: &'static str = concat!(
+    "HTTP/1.1 404 Not Found",
+    "\r\n",
+    "\r\n",
+    include_str!("../static/404.html"),
 );
 
 fn main() {
@@ -22,7 +29,12 @@ fn main() {
 fn handle_conn(mut stream: TcpStream) {
     let mut buffer = [0; 512];
     stream.read(&mut buffer).unwrap();
-    println!("request: {}", String::from_utf8_lossy(&buffer[..]));
-    stream.write(RESPONSE.as_bytes()).unwrap();
+    // println!("request: {}", String::from_utf8_lossy(&buffer[..]));
+    let resp = if buffer.starts_with(b"GET / HTTP/1.1\r\n") {
+        OK
+    } else {
+        NOT_FOUND
+    };
+    stream.write(resp.as_bytes()).unwrap();
     stream.flush().unwrap();
 }
