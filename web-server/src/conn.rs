@@ -17,6 +17,8 @@ const NOT_FOUND: &'static str = concat!(
     include_str!("../static/404.html"),
 );
 
+/// Handle a connection stream. Just respond with some simple HTML pages.
+/// Panic if couldn't read or write from the stream.
 pub fn handle(mut stream: TcpStream) {
     let mut buffer = [0; 512];
     stream.read(&mut buffer).unwrap();
