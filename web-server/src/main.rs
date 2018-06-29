@@ -1,6 +1,9 @@
 use std::net::TcpListener;
 
 mod conn;
+mod thread_pool;
+
+use thread_pool::ThreadPool;
 
 const HOST: &'static str = "localhost:7878";
 
