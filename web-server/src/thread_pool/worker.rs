@@ -15,7 +15,7 @@ impl Worker {
     pub fn new(id: usize, rx: Arc<Mutex<mpsc::Receiver<Job>>>) -> Self {
         let handle = thread::spawn(move || {
             let f = rx.lock().unwrap().recv().unwrap();
-            f();
+            f.call_box();
         });
         Worker { id, handle }
     }

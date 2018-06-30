@@ -6,7 +6,17 @@ mod worker;
 
 use self::worker::Worker;
 
-type Job = Box<dyn FnOnce() + Send + 'static>;
+pub trait FnBox {
+    fn call_box(self: Box<Self>);
+}
+
+impl<F: FnOnce()> FnBox for F {
+    fn call_box(self: Box<F>) {
+        (*self)()
+    }
+}
+
+type Job = Box<dyn FnBox + Send + 'static>;
 
 pub struct ThreadPool {
     tx: mpsc::Sender<Job>,
