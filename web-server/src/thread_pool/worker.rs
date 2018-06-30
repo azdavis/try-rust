@@ -14,9 +14,12 @@ impl Worker {
     /// Create a new worker.
     pub fn new(id: usize, rx: Arc<Mutex<mpsc::Receiver<Job>>>) -> Self {
         let handle = thread::spawn(move || {
-            let f = rx.lock().unwrap().recv().unwrap();
-            println!("id {} got a job", id);
-            f.call_box();
+            loop {
+                let f = rx.lock().unwrap().recv().unwrap();
+                println!("id {} got a job", id);
+                f.call_box();
+                println!("id {} done", id);
+            }
         });
         Worker { id, handle }
     }
