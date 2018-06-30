@@ -18,8 +18,13 @@ impl<F: FnOnce()> FnBox for F {
 
 type Job = Box<dyn FnBox + Send + 'static>;
 
+pub enum Msg {
+    Exec(Job),
+    Term,
+}
+
 pub struct ThreadPool {
-    tx: mpsc::Sender<Job>,
+    tx: mpsc::Sender<Msg>,
     workers: Vec<Worker>,
 }
 
@@ -40,7 +45,7 @@ impl ThreadPool {
     /// in the pool is not busy, exactly one of them will execute f.
     pub fn execute<F>(&self, f: F) where F: FnOnce() + Send + 'static {
         let job = Box::new(f);
-        self.tx.send(job).unwrap();
+        self.tx.send(Msg::Exec(job)).unwrap();
     }
 }
 

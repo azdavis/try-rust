@@ -3,7 +3,7 @@ use std::sync::mpsc;
 use std::sync::Mutex;
 use std::thread;
 
-use super::Job;
+use super::Msg;
 
 pub struct Worker {
     pub id: usize,
@@ -12,13 +12,17 @@ pub struct Worker {
 
 impl Worker {
     /// Create a new worker.
-    pub fn new(id: usize, rx: Arc<Mutex<mpsc::Receiver<Job>>>) -> Self {
+    pub fn new(id: usize, rx: Arc<Mutex<mpsc::Receiver<Msg>>>) -> Self {
         let handle = Some(thread::spawn(move || {
             loop {
-                let f = rx.lock().unwrap().recv().unwrap();
-                println!("id {} got a job", id);
-                f.call_box();
-                println!("id {} done", id);
+                match rx.lock().unwrap().recv().unwrap() {
+                    Msg::Exec(f) => {
+                        println!("id {} got a job", id);
+                        f.call_box();
+                        println!("id {} done", id);
+                    },
+                    Msg::Term => break,
+                };
             }
         }));
         Worker { id, handle }
