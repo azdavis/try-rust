@@ -43,3 +43,12 @@ impl ThreadPool {
         self.tx.send(job).unwrap();
     }
 }
+
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        for worker in &mut self.workers {
+            println!("id {} shutting down", worker.id);
+            worker.handle.take().map(|x| x.join().unwrap());
+        }
+    }
+}
