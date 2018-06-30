@@ -17,11 +17,14 @@ impl Worker {
             loop {
                 match rx.lock().unwrap().recv().unwrap() {
                     Msg::Exec(f) => {
-                        println!("id {} got a job", id);
+                        println!("id {} got a Exec", id);
                         f.call_box();
-                        println!("id {} done", id);
+                        println!("id {} done with that Exec", id);
                     },
-                    Msg::Term => break,
+                    Msg::Term => {
+                        println!("id {} got a Term", id);
+                        break
+                    },
                 };
             }
         }));

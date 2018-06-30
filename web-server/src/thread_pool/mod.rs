@@ -51,9 +51,14 @@ impl ThreadPool {
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
+        for worker in &self.workers {
+            println!("sending Term to {}", worker.id);
+            self.tx.send(Msg::Term).unwrap();
+        }
         for worker in &mut self.workers {
-            println!("id {} shutting down", worker.id);
+            println!("waiting for {} to term", worker.id);
             worker.handle.take().map(|x| x.join().unwrap());
         }
+        println!("dropping this ThreadPool");
     }
 }
