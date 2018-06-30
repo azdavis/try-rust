@@ -6,7 +6,7 @@ mod worker;
 
 use self::worker::Worker;
 
-pub struct Job;
+type Job = Box<dyn FnOnce() + Send + 'static>;
 
 pub struct ThreadPool {
     tx: mpsc::Sender<Job>,
@@ -28,8 +28,7 @@ impl ThreadPool {
 
     /// Register f for later execution. As soon as at least one of the threads
     /// in the pool is not busy, exactly one of them will execute f.
-    pub fn execute<F>(&self, f: F)
-    where F: FnOnce() + Send + 'static {
-        //
+    pub fn execute<F>(&self, f: F) where F: FnOnce() + Send + 'static {
+        let job = Box::new(f);
     }
 }
