@@ -30,5 +30,6 @@ impl ThreadPool {
     /// in the pool is not busy, exactly one of them will execute f.
     pub fn execute<F>(&self, f: F) where F: FnOnce() + Send + 'static {
         let job = Box::new(f);
+        self.tx.send(job).unwrap();
     }
 }
