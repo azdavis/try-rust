@@ -42,6 +42,10 @@ version = "0.2.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "macros"
+version = "0.1.0"
+
+[[package]]
 name = "minigrep"
 version = "0.1.0"
 
