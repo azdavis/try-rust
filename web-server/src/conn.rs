@@ -10,6 +10,13 @@ const OK: &'static str = concat!(
     include_str!("../static/index.html"),
 );
 
+const STYLE: &'static str = concat!(
+    "HTTP/1.1 200 OK",
+    "\r\n",
+    "\r\n",
+    include_str!("../static/style.css"),
+);
+
 const NOT_FOUND: &'static str = concat!(
     "HTTP/1.1 404 Not Found",
     "\r\n",
@@ -27,6 +34,8 @@ pub fn handle(mut stream: TcpStream) {
     } else if buffer.starts_with(b"GET /sleep HTTP/1.1\r\n") {
         thread::sleep(Duration::from_secs(5));
         OK
+    } else if buffer.starts_with(b"GET /style.css HTTP/1.1\r\n") {
+        STYLE
     } else {
         NOT_FOUND
     };
