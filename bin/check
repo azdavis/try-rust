@@ -2,7 +2,14 @@
 
 set -eu
 
+panic() {
+  echo "$1" >&2
+  exit 1
+}
+
 root="$(git rev-parse --show-toplevel)"
 cd "$root"
 
-exec cargo check
+if ! RUSTFLAGS="-D warnings" cargo check --quiet; then
+  panic "cargo check failed"
+fi
