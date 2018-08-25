@@ -1,6 +1,6 @@
-mod mut_ref;
+mod if_let;
 
 fn main() {
     println!("Hello, world!");
-    mut_ref::run();
+    if_let::run();
 }
