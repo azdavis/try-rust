@@ -7,4 +7,5 @@ An attempt to learn [Rust][] by following along in [The Book][].
 
 ## Setup
 
-Run `./bin/setup` to set up hooks for `git`, install dependencies with `cargo`, and build.
+Run `./scripts/setup` to set up hooks for `git`, install dependencies with
+`cargo`, and build.
