@@ -9,4 +9,4 @@ mkdir -p .git/hooks
 rm -rf .git/hooks/pre-push
 ln -s ../../bin/check .git/hooks/pre-push
 
-cargo build
+cargo check
