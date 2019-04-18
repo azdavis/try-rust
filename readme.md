@@ -1,6 +1,6 @@
 # try-rust
 
-An attempt to learn [Rust][] by following along in [The Book][].
+An attempt to learn [Rust][1] by following along in [The Book][2].
 
-[rust]: https://www.rust-lang.org
-[the book]: https://doc.rust-lang.org/book/second-edition
+[1]: https://www.rust-lang.org
+[2]: https://doc.rust-lang.org/book/second-edition
