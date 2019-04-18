@@ -1,6 +1,6 @@
-mod if_let;
+mod from_fn;
 
 fn main() {
   println!("Hello, world!");
-  if_let::run();
+  from_fn::run();
 }
