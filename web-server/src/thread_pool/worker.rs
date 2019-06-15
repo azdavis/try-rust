@@ -18,7 +18,7 @@ impl Worker {
       match msg {
         Msg::Exec(f) => {
           println!("id {} got a Exec", id);
-          f.call_box();
+          f();
           println!("id {} done with that Exec", id);
         }
         Msg::Term => {
