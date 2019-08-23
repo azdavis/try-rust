@@ -1,6 +1,6 @@
-mod from_fn;
+mod multi_mut_borrow;
 
 fn main() {
   println!("Hello, world!");
-  from_fn::run();
+  multi_mut_borrow::run();
 }
