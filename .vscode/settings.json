@@ -1,4 +1,6 @@
 {
+  "editor.insertSpaces": true,
+  "prettier.useTabs": false,
   "files.exclude": {
     "target": true
   }
