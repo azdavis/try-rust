@@ -1,6 +1,6 @@
-mod multi_mut_borrow;
+mod slice;
 
 fn main() {
   println!("Hello, world!");
-  multi_mut_borrow::run();
+  slice::run();
 }
