@@ -1,6 +1,6 @@
-mod slice;
+mod trait_obj;
 
 fn main() {
-  println!("Hello, world!");
-  slice::run();
+  println!("hello from the sandbox!");
+  trait_obj::run();
 }
