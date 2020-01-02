@@ -1,9 +1,9 @@
 [workspace]
 members = [
-    "communicator",
-    "guessing-game",
-    "macros",
-    "minigrep",
-    "sandbox",
-    "web-server",
+  "communicator",
+  "guessing-game",
+  "macros",
+  "minigrep",
+  "sandbox",
+  "web-server",
 ]
