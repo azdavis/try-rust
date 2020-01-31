@@ -50,7 +50,9 @@ impl Drop for ThreadPool {
     }
     for worker in &mut self.workers {
       println!("waiting for {} to term", worker.id);
-      worker.handle.take().map(|x| x.join().unwrap());
+      if let Some(x) = worker.handle.take() {
+        x.join().unwrap();
+      }
     }
     println!("dropping this ThreadPool");
   }

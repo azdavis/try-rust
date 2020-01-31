@@ -5,7 +5,7 @@ mod thread_pool;
 
 use thread_pool::ThreadPool;
 
-const HOST: &'static str = "localhost:7878";
+const HOST: &str = "localhost:7878";
 
 fn main() {
   let listener = TcpListener::bind(HOST).unwrap();

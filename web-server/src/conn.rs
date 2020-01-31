@@ -3,21 +3,21 @@ use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
 
-const OK: &'static str = concat!(
+const OK: &str = concat!(
   "HTTP/1.1 200 OK",
   "\r\n",
   "\r\n",
   include_str!("../static/index.html"),
 );
 
-const STYLE: &'static str = concat!(
+const STYLE: &str = concat!(
   "HTTP/1.1 200 OK",
   "\r\n",
   "\r\n",
   include_str!("../static/style.css"),
 );
 
-const NOT_FOUND: &'static str = concat!(
+const NOT_FOUND: &str = concat!(
   "HTTP/1.1 404 Not Found",
   "\r\n",
   "\r\n",
@@ -39,6 +39,6 @@ pub fn handle(mut stream: TcpStream) {
   } else {
     NOT_FOUND
   };
-  stream.write(resp.as_bytes()).unwrap();
+  stream.write_all(resp.as_bytes()).unwrap();
   stream.flush().unwrap();
 }
