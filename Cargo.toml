@@ -1,6 +1,6 @@
 [workspace]
 members = [
-  "c-ffi",
+  "c-from-rust",
   "communicator",
   "guessing-game",
   "macros",
