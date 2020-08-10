@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "c-from-rust",
+  "rust-from-c",
   "communicator",
   "guessing-game",
   "macros",
