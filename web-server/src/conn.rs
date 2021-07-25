@@ -1,4 +1,4 @@
-use std::io::prelude::*;
+use std::io::{BufRead as _, BufReader, Read as _, Write as _};
 use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
@@ -26,9 +26,11 @@ const NOT_FOUND: &str = concat!(
 
 /// Handle a connection stream. Just respond with some simple HTML pages.
 /// Panic if couldn't read or write from the stream.
-pub fn handle(mut stream: TcpStream) {
-  let mut buffer = [0; 512];
-  stream.read(&mut buffer).unwrap();
+pub fn handle(stream: TcpStream) {
+  const MAX: u64 = 512;
+  let mut stream = BufReader::new(stream.take(MAX));
+  let mut buffer = Vec::with_capacity(MAX as usize);
+  stream.read_until(b'\n', &mut buffer).unwrap();
   let resp = if buffer.starts_with(b"GET / HTTP/1.1\r\n") {
     OK
   } else if buffer.starts_with(b"GET /sleep HTTP/1.1\r\n") {
@@ -39,6 +41,7 @@ pub fn handle(mut stream: TcpStream) {
   } else {
     NOT_FOUND
   };
+  let mut stream = stream.into_inner().into_inner();
   stream.write_all(resp.as_bytes()).unwrap();
   stream.flush().unwrap();
 }
