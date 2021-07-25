@@ -27,7 +27,7 @@ const NOT_FOUND: &str = concat!(
 /// Handle a connection stream. Just respond with some simple HTML pages.
 /// Panic if couldn't read or write from the stream.
 pub fn handle(stream: TcpStream) {
-  const MAX: u64 = 512;
+  const MAX: u64 = 1 << 12;
   let mut stream = BufReader::new(stream.take(MAX));
   let mut buffer = Vec::with_capacity(MAX as usize);
   stream.read_until(b'\n', &mut buffer).unwrap();
