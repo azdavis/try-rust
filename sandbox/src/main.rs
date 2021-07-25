@@ -9,11 +9,12 @@ mod lazy;
 mod multi_mut_borrow;
 mod mut_ref;
 mod partial_move;
+mod rc_ref_cell;
 mod rect;
 mod slice;
 mod trait_obj;
 
 fn main() {
   println!("hello from the sandbox!");
-  trait_obj::run();
+  rc_ref_cell::run();
 }
