@@ -9,7 +9,7 @@ fn hmm(x: &mut String) -> &String {
   x
 }
 
-fn heh(x: &String) {
+fn heh(x: &str) {
   println!("{}", x);
   // x.push_str("heh")
 }
